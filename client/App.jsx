@@ -1,8 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import Sidebar from "./Sidebar";
+
 const Index = () => {
-  return <div>Hello React!</div>;
+  return (
+    <div>
+      Hello React!
+      <Sidebar />
+    </div>
+  )
 };
 
 const render_react = () => {
