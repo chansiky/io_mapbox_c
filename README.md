@@ -7,10 +7,10 @@ uses nodejs 12.0.0.  If you use `asdf`:
 asdf install
 ```
 
-start the server:  
+build the bundle and start the server:  
 ```
-yarn start
+npm run start
 ```
 
-listen for the server on localhost:4000
+listen for the server on localhost:1000
 
