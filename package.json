@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start-server": "node server",
-    "start": "webpack --mode development",
-    "build": "webpack --mode production"
+    "webpack-dev": "webpack --mode development",
+    "webpack-prod": "webpack --mode production",
+    "start-dev": "npm run webpack-dev & npm run start-server",
+    "start": "npm run webpack-prod & npm run start-server"
   },
   "author": "",
   "license": "ISC",
