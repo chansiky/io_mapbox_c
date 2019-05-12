@@ -5,6 +5,8 @@ const Index = () => {
   return <div>Hello React!</div>;
 };
 
-export default render = () => {
-  ReactDOM.render(<Index />, document.getElementById("root"));
+const render_react = () => {
+  ReactDOM.render(<Index />, document.getElementById("react"));
 }
+
+export default render_react
