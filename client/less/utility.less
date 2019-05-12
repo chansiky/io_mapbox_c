@@ -1,5 +1,4 @@
-@color_b_active: #9DBFD3;
-@color_b_inactive: lighten(@color_b_active, 10%);
+@import (reference) "colors.less";
 
 .sidebar_width {
   width: 200px;
@@ -30,9 +29,9 @@
 }
 
 .background_color_a_hover {
-  background-color: @color_b_inactive;
+  background-color: @color_a_inactive;
 }
 
 .background_color_a_hover:hover {
-  background-color: @color_b_active;
+  background-color: @color_a_active;
 }
