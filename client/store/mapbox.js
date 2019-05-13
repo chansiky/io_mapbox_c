@@ -13,6 +13,7 @@ const TOGGLE_SATELLITE = 'TOGGLE_SATELLITE';
 export const toggle_satellite = toggle_creator(TOGGLE_SATELLITE)
 export const toggle_labels    = toggle_creator(TOGGLE_LABELS)
 
+
 const mapbox_reducer = (state = initial_state, action) => {
   switch (action.type) {
     case TOGGLE_LABELS:

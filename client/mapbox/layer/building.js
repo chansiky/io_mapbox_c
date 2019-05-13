@@ -22,22 +22,22 @@ export const building_layer = (map) => {
       'type': 'fill-extrusion',
       'minzoom': 15,
       'paint': {
-      'fill-extrusion-color': '#aaa',
-      'background-color': "#DFF52A",
-      // use an 'interpolate' expression to add a smooth transition effect to the
-      // buildings as the user zooms in
-      'fill-extrusion-height': [
-      "interpolate", ["linear"], ["zoom"],
-      15, 0,
-      15.05, ["get", "height"]
-      ],
-      'fill-extrusion-base': [
-      "interpolate", ["linear"], ["zoom"],
-      15, 0,
-      15.05, ["get", "min_height"]
-      ],
-      'fill-extrusion-opacity': .6
-      }
+        'fill-extrusion-color': '#aaa',
+        'background-color': "#DFF52A",
+        // use an 'interpolate' expression to add a smooth transition effect to the
+        // buildings as the user zooms in
+        'fill-extrusion-height': [
+          "interpolate", ["linear"], ["zoom"],
+          15, 0,
+          15.05, ["get", "height"]
+          ],
+          'fill-extrusion-base': [
+          "interpolate", ["linear"], ["zoom"],
+          15, 0,
+          15.05, ["get", "min_height"]
+        ],
+        'fill-extrusion-opacity': .6
+        }
       }, labelLayerId);
     }
   );
