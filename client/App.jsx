@@ -4,12 +4,14 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 import Sidebar from "./Sidebar";
+import Map from "./Map";
 
 const Index = () => {
   return (
     <div>
       <Provider store={store}>
         <Sidebar />
+        <Map />
       </Provider>
     </div>
   )
