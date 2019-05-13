@@ -1,11 +1,11 @@
-import {empty_square} from '../../helper/chicago_locations';
+import {empty_lot_1} from '../../helper/chicago_locations';
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 // parameters to ensure the model is georeferenced correctly on the map
-var modelOrigin = [empty_square.lng, empty_square.lat];
+var modelOrigin = [empty_lot_1.lng, empty_lot_1.lat];
 var modelAltitude = 0;
 var modelRotate = [Math.PI / 2, 0, 0];
-var modelScale = 1;
+var modelScale = 5e-9;
 var modelTransform = {
   translateX: mapboxgl.MercatorCoordinate.fromLngLat(modelOrigin, modelAltitude).x,
   translateY: mapboxgl.MercatorCoordinate.fromLngLat(modelOrigin, modelAltitude).y,
@@ -38,12 +38,14 @@ export const obj_layer = {
     // use the three.js GLTF loader to add the 3D model to the three.js scene
     console.log('loading obj')
     this.OBJLoader = new THREE.OBJLoader();
+    this.OBJLoader = new THREE.OBJLoader().setPath('/models/apartment_26-obj/');
 
     this.OBJLoader.load(
-      '../../../public/apartment_26.obj',
+      'apartment_26.obj',
       //'https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj',
       ( object ) => {
         console.log('adding obj to scene');
+        console.log({object});
         this.scene.add( object );
       },
       // called when loading is in progresses
@@ -73,6 +75,7 @@ export const obj_layer = {
   },
   render: function(gl, matrix) {
     const THREE = window.THREE;
+
     var rotationX = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), modelTransform.rotateX);
     var rotationY = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0), modelTransform.rotateY);
     var rotationZ = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, 1), modelTransform.rotateZ);

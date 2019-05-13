@@ -23,7 +23,7 @@ export const building_layer = (map) => {
       'minzoom': 15,
       'paint': {
       'fill-extrusion-color': '#aaa',
-
+      'background-color': "#DFF52A",
       // use an 'interpolate' expression to add a smooth transition effect to the
       // buildings as the user zooms in
       'fill-extrusion-height': [

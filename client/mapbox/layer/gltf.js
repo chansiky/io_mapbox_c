@@ -1,11 +1,11 @@
-import {empty_square} from '../../helper/chicago_locations';
+import {empty_lot_2} from '../../helper/chicago_locations';
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 // parameters to ensure the model is georeferenced correctly on the map
-var modelOrigin = [empty_square.lng, empty_square.lat];
+var modelOrigin = [empty_lot_2.lng, empty_lot_2.lat];
 var modelAltitude = 0;
 var modelRotate = [Math.PI / 2, 0, 0];
-var modelScale = 5.41843220338983e-8;
+var modelScale = 5.41843220338983e-7;
 var modelTransform = {
   translateX: mapboxgl.MercatorCoordinate.fromLngLat(modelOrigin, modelAltitude).x,
   translateY: mapboxgl.MercatorCoordinate.fromLngLat(modelOrigin, modelAltitude).y,
@@ -36,14 +36,27 @@ export const gltf_layer = {
     this.scene.add(directionalLight2);
 
     // use the three.js GLTF loader to add the 3D model to the three.js scene
-    this.GLTFLoader = new THREE.GLTFLoader().setPath('../../../public/damaged/helmet');
+    //this.GLTFLoader = new THREE.GLTFLoader().setPath('./');
+    this.GLTFLoader = new THREE.GLTFLoader();
+    this.GLTFLoader.setPath('/models/damaged_helmet-gltf/');
+    console.log('loading gltf');
 
     //this.GLTFLoader.load('https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf', (function (gltf) {
 
-    this.GLTFLoader.load('DamagedHelmet.gltf', (function (gltf) {
-      console.log(gltf);
+    this.GLTFLoader.load('DamagedHelmet.gltf', (gltf) => {
+      console.log('adding gltf to scene');
+      console.log({gltf});
       this.scene.add(gltf.scene);
-    }).bind(this));
+    },
+    // called when loading is in progresses
+    function ( xhr ) {
+      console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+    },
+    // called when loading has errors
+    function ( error ) {
+      console.log( 'An error happened while loading gltf file, error was:', error );
+    }
+    )
     this.map = map;
 
     // use the Mapbox GL JS map canvas for three.js

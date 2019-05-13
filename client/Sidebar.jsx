@@ -6,10 +6,12 @@ import {
   toggle_labels,
   toggle_satellite
   } from './store';
+import {print_location} from './helper/curr_directory_test';
 
 const button_style = `${style.no_focus_outline} ${style.border_radius_8px} ${style.background_color_light_gray_hover} ${style.border_0} ${style.width_150px} ${style.margin_2px}`;
 
 const Sidebar = (props) => {
+  print_location();
   return (
     <section className={`${style.width_200px} ${style.flex_column} ${style.background_color_b} ${style.padding_4px}`}>
       <h2 className={style.margin_0}> Sidebar </h2>

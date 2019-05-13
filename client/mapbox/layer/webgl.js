@@ -1,4 +1,4 @@
-import {empty_square, willis_tower, marina_city} from '../../helper/chicago_locations';
+import {empty_lot_1, willis_tower, marina_city} from '../../helper/chicago_locations';
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 // transformation parameters to position, rotate and scale the 3D model onto the map
@@ -32,7 +32,7 @@ export const webgl_layer = {
 
     this.aPos = gl.getAttribLocation(this.program, "a_pos");
 
-    var helsinki = mapboxgl.MercatorCoordinate.fromLngLat(empty_square);
+    var helsinki = mapboxgl.MercatorCoordinate.fromLngLat(empty_lot_1);
     var berlin = mapboxgl.MercatorCoordinate.fromLngLat(willis_tower);
     var kyiv = mapboxgl.MercatorCoordinate.fromLngLat(marina_city);
 
