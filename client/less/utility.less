@@ -1,5 +1,32 @@
 @import (reference) "colors.less";
 
+.flex_row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex_column {
+  display: flex;
+  flex-direction: column;
+}
+
+.max_view_width_height {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.flex_grow_1 {
+  flex-grow: 1;
+}
+
+.box_shadow_0 {
+  box-shadow: 0px;
+}
+
+.flex_items_stretch {
+  align-items: stretch;
+}
+
 .sidebar_width {
   width: 200px;
 }
@@ -12,8 +39,16 @@
   text_align: center;
 }
 
+.width_100px {
+  width: 100px;
+}
+
 .width_150px {
   width: 150px;
+}
+
+.width_200px {
+  width: 200px;
 }
 
 .border_0 {
@@ -22,6 +57,18 @@
 
 .border_radius_4px {
   border-radius: 4px;
+}
+
+.border_radius_8px {
+  border-radius: 4px;
+}
+
+.padding_4px {
+  padding: 4px;
+}
+
+.margin_0 {
+  margin: 0;
 }
 
 .margin_2px {
@@ -34,4 +81,24 @@
 
 .background_color_a_hover:hover {
   background-color: @color_a_active;
+}
+
+.background_color_b {
+  background-color: seashell1;
+}
+
+.background_color_light_gray_hover {
+  background-color: @color_light_gray_inactive;
+}
+
+.background_color_light_gray_hover:hover {
+  background-color: @color_light_gray_active;
+}
+
+.no_focus_outline:focus {
+  outline: 0;
+}
+
+.no_child_focus_outline *:focus {
+  outline: 0;
 }

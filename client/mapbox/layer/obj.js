@@ -5,7 +5,7 @@ var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 var modelOrigin = [empty_square.lng, empty_square.lat];
 var modelAltitude = 0;
 var modelRotate = [Math.PI / 2, 0, 0];
-var modelScale = 5.41843220338983e-8;
+var modelScale = 1;
 var modelTransform = {
   translateX: mapboxgl.MercatorCoordinate.fromLngLat(modelOrigin, modelAltitude).x,
   translateY: mapboxgl.MercatorCoordinate.fromLngLat(modelOrigin, modelAltitude).y,
@@ -17,8 +17,8 @@ var modelTransform = {
 };
 // configuration of the custom layer for a 3D model per the CustomLayerInterfac
 
-export const gltf_layer = {
-  id: '3d-model',
+export const obj_layer = {
+  id: 'OBJ_model',
   type: 'custom',
   renderingMode: '3d',
   onAdd: function(map, gl) {
@@ -36,14 +36,31 @@ export const gltf_layer = {
     this.scene.add(directionalLight2);
 
     // use the three.js GLTF loader to add the 3D model to the three.js scene
-    this.GLTFLoader = new THREE.GLTFLoader().setPath('../../../public/damaged/helmet');
+    console.log('loading obj')
+    this.OBJLoader = new THREE.OBJLoader();
 
-    //this.GLTFLoader.load('https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf', (function (gltf) {
+    this.OBJLoader.load(
+      '../../../public/apartment_26.obj',
+      //'https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj',
+      ( object ) => {
+        console.log('adding obj to scene');
+        this.scene.add( object );
+      },
+      // called when loading is in progresses
+      function ( xhr ) {
+        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+      },
+      // called when loading has errors
+      function ( error ) {
+        console.log( 'An error happened while loading obj file, error was:', error );
+      }
+    );
 
-    this.GLTFLoader.load('DamagedHelmet.gltf', (function (gltf) {
-      console.log(gltf);
-      this.scene.add(gltf.scene);
+    /*
+    this.OBJLoader.load('https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teapot.obj', (function (obj) {
+      this.scene.add(obj.scene);
     }).bind(this));
+    */
     this.map = map;
 
     // use the Mapbox GL JS map canvas for three.js
