@@ -39,7 +39,6 @@ export const import_obj_layer = (lng = 0, lat = 0) => {
       directionalLight2.position.set(0, 70, 100).normalize();
       this.scene.add(directionalLight2);
   
-      // use the three.js GLTF loader to add the 3D model to the three.js scene
       this.OBJLoader = new THREE.OBJLoader();
       this.OBJLoader = new THREE.OBJLoader().setPath('/models/apartment_26-obj/');
   

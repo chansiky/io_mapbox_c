@@ -10,19 +10,22 @@ import {
   ID_OBJ_IMPORT
 } from './mapbox/layer';
 import {import_obj_layer} from './mapbox/layer/obj';
+import {set_light} from './mapbox/light';
 
 import {
   toggle_labels,
   toggle_satellite,
   toggle_water,
   toggle_3d_buildings,
-  toggle_obj_show
+  toggle_obj_show,
+  update_light_azimuth
 } from './store';
 
 const button_style = `${style.no_focus_outline} ${style.border_radius_8px} ${style.background_color_light_gray_hover} ${style.border_0} ${style.width_150px} ${style.margin_2px}`;
 
 const Sidebar = (props) => {
   const [obj_imported, setObjImported] = useState(false);
+  const [light_a, setLightA] = useState(50);
 
   return (
     <section className={`${style.width_200px} ${style.flex_column} ${style.background_color_b} ${style.padding_4px}`}>
@@ -39,27 +42,46 @@ const Sidebar = (props) => {
       <button className={`${button_style}`} onClick={() => props.toggle_3d_buildings(props.buildings_3d_on, props.mapElem, ID_3D_BUILDINGS)}>
          3D-buildings: {props.buildings_3d_on ? "on" : "off"}
       </button>
-      <button className={`${button_style}`} disabled={obj_imported} onClick={() => {
-        import_obj(props.mapElem, props.lng, props.lat);
-        setObjImported(true);
-      }}>
-         import OBJ model
-      </button>
-      {
-        obj_imported &&
-        <button className={`${button_style}`} onClick={() => props.toggle_obj_show(props.obj_show_on, props.mapElem, ID_OBJ_IMPORT)}>
-           show obj: {props.obj_show_on ? "on" : "off"}
+      <div>
+        <h4>light: </h4>
+        <span>azimuth:{props.light_a}</span>
+        <input
+          type="range"
+          min="1"
+          max="360"
+          value={props.light_a}
+          className={style.width_150px}
+          id="myRange"
+          onChange={(e) => {
+            const new_value = Number(e.target.value)
+            props.update_light_values(props.mapElem, props.light_i, props.light_r, new_value, props.light_p)
+          }}
+        />
+      </div>
+      <div>
+        <h4>obj import: </h4>
+        <button className={`${button_style}`} disabled={obj_imported} onClick={() => {
+          import_obj(props.mapElem, props.lng, props.lat);
+          setObjImported(true);
+        }}>
+           import OBJ model
         </button>
-      }
-      <div className={style.margin_5px}>
-        <div>
-          insertion point:
-        </div>
-        <div>
-          lng: {props.lng}
-        </div>
-        <div>
-          lat: {props.lat}
+        {
+          obj_imported &&
+          <button className={`${button_style}`} onClick={() => props.toggle_obj_show(props.obj_show_on, props.mapElem, ID_OBJ_IMPORT)}>
+             show obj: {props.obj_show_on ? "on" : "off"}
+          </button>
+        }
+        <div className={style.margin_5px}>
+          <div>
+            insertion point:
+          </div>
+          <div>
+            lng: {props.lng}
+          </div>
+          <div>
+            lat: {props.lat}
+          </div>
         </div>
       </div>
     </section>
@@ -81,7 +103,11 @@ const mapStateToProps = (state, ownProps) => {
     buildings_3d_on: state.mapbox.buildings_3d,
     obj_show_on: state.mapbox.obj_show,
     lng: state.mapbox.pt_lng,
-    lat: state.mapbox.pt_lat
+    lat: state.mapbox.pt_lat,
+    light_r: state.mapbox.light_r,
+    light_a: state.mapbox.light_a,
+    light_p: state.mapbox.light_p,
+    light_i: state.mapbox.light_intensity
   }
 }
 
@@ -107,6 +133,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggle_obj_show: (bool, map, layer) => {
       dispatch(toggle_obj_show(bool));
       set_layer_visibility(map)(layer)(!bool);
+    },
+    update_light_values: (map, light_i, light_r, light_a, light_p) => {
+      dispatch(update_light_azimuth(light_a));
+
+      let light_values = {
+        intensity: light_i,
+        position: [
+          light_r,
+          light_a,
+          light_p
+        ]
+      }
+      map.setLight(light_values);
     }
   }
 }

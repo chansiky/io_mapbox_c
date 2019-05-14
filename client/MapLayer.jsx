@@ -10,8 +10,9 @@ import {layer_adder, set_layer_visibility} from './mapbox/layer_helper';
 import {
   update_pt_lng_lat,
 } from './store';
-
 import {connect} from 'react-redux';
+
+import {light_values} from './mapbox/light';
 
 const MapLayer = ({mapElem, update_lng_lat, lng, lat}) => {
   useEffect(() => {
@@ -24,7 +25,13 @@ const MapLayer = ({mapElem, update_lng_lat, lng, lat}) => {
 
         mark_mouse_coords(mapElem, update_lng_lat);
 
-        //layer_adder(mapElem, import_obj_layer(lng, lat));
+        const light = mapElem.getLight();
+        console.log({light})
+
+        mapElem.setLight(light_values);
+        const light_2 = mapElem.getLight();
+        console.log({light})
+        console.log({light_2})
       })
     }
   })

@@ -8,7 +8,11 @@ const initial_state = {
   water: false,
   obj_show: true,
   pt_lng: empty_lot_1.lng,
-  pt_lat: empty_lot_1.lat
+  pt_lat: empty_lot_1.lat,
+  light_r: 1.5,
+  light_a: 90, //0-360 - 180 is south
+  light_p: 40, //0-360 - 180 is directly below
+  light_intensity: 0.5, //0-1
 }
 
 // action type
@@ -18,6 +22,7 @@ const TOGGLE_SATELLITE = 'TOGGLE_SATELLITE';
 const TOGGLE_OBJ_SHOW = 'TOGGLE_OBJ_SHOW';
 const TOGGLE_3D_BUILDINGS = 'TOGGLE_3D_BUILDINGS';
 const UPDATE_PT_LNG_LAT = 'UPDATE_PT_LNG_LAT';
+const UPDATE_LIGHT_AZIMUTH = 'UPDATE_LIGHT_AZIMUTH';
 
 // action creator
 export const toggle_satellite    = toggle_creator(TOGGLE_SATELLITE)
@@ -30,6 +35,12 @@ export const update_pt_lng_lat   = (lng, lat) => {
     type: UPDATE_PT_LNG_LAT,
     lng: lng,
     lat: lat
+  }
+}
+export const update_light_azimuth   = (az) => {
+  return {
+    type: UPDATE_LIGHT_AZIMUTH,
+    azimuth: az
   }
 }
 
@@ -47,6 +58,8 @@ const mapbox_reducer = (state = initial_state, action) => {
       return {...state, obj_show: action.value}
     case UPDATE_PT_LNG_LAT:
       return {...state, pt_lng: action.lng, pt_lat: action.lat}
+    case UPDATE_LIGHT_AZIMUTH:
+      return {...state, light_a: action.azimuth}
     default:
       return state
   }
