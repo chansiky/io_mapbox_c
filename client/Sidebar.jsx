@@ -35,7 +35,7 @@ const Sidebar = (props) => {
         labels: {props.labels_on ? "on" : "off"}
       </button>
       <button className={`${button_style}`} onClick={() => props.toggle_water(props.water_on, props.mapElem, ID_WATER)}>
-        green_water: {props.water_on ? "on" : "off"}
+        water: {props.water_on ? "on" : "off"}
       </button>
       <button className={`${button_style}`} onClick={() => props.toggle_satellite(props.satellite_on, props.mapElem, ID_SATELLITE)}>
          sattelite: {props.satellite_on ? "on" : "off"}

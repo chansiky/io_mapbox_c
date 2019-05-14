@@ -26,7 +26,7 @@ export const building_layer = (map) => {
       "visibility": "visible",
     },
     'paint': {
-      'fill-extrusion-color': '#aaa',
+      'fill-extrusion-color': '#EFEADF',
       // use an 'interpolate' expression to add a smooth transition effect to the
       // buildings as the user zooms in
       'fill-extrusion-height': [
@@ -45,7 +45,7 @@ export const building_layer = (map) => {
           15.05,
           ["get", "min_height"]
       ],
-      'fill-extrusion-opacity': .6,
+      'fill-extrusion-opacity': .8,
       }
   }, labelLayerId);
 

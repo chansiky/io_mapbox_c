@@ -16,7 +16,7 @@ export const water_layer = (map) => {
         "visibility": "none",
       },
       "paint": {
-        "fill-color": "#0DEDC4"
+        "fill-color": "#209DB4"
       }
     }, "building"
   );
