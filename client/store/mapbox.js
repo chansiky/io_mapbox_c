@@ -9,10 +9,10 @@ const initial_state = {
   obj_show: true,
   pt_lng: empty_lot_1.lng,
   pt_lat: empty_lot_1.lat,
-  light_i: 0.5, //0-1
+  light_i: 0.5,
   light_r: 1.5,
-  light_a: 90, //0-360 - 180 is south
-  light_p: 40, //0-360 - 180 is directly below
+  light_a: 90,
+  light_p: 40,
 }
 
 // action type

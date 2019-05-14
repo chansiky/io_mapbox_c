@@ -17,7 +17,6 @@ export const increment = () => {
 const counter_reducer = (state = initial_state, action) => {
   switch (action.type) {
     case INCREMENT:
-      console.log('testing two');
       const add_one = state.count + 1
       return {...state, count: add_one}
     case 'DECREMENT':

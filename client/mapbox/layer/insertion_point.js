@@ -26,3 +26,5 @@ export const setup_insertion_point = (map, lng, lat) => {
   }
   });
 }
+
+

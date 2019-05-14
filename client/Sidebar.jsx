@@ -69,6 +69,19 @@ const Sidebar = (props) => {
             props.update_light_values(props.mapElem, props.light_i, props.light_r, props.light_a, new_value)
           }}
         />
+        <div>radial coord:{props.light_r}</div>
+        <input
+          type="range"
+          min="-5"
+          max="5"
+          step="0.05"
+          value={props.light_r}
+          className={style.width_150px}
+          onChange={(e) => {
+            const new_value = Number(e.target.value)
+            props.update_light_values(props.mapElem, props.light_i, new_value, props.light_a, props.light_p)
+          }}
+        />
         <div>intensity:{props.light_i}</div>
         <input
           type="range"
@@ -82,24 +95,13 @@ const Sidebar = (props) => {
             props.update_light_values(props.mapElem, new_value, props.light_a, props.light_a, props.light_p)
           }}
         />
-        <div>radial coord:{props.light_r}</div>
-        <input
-          type="range"
-          min="-180"
-          max="180"
-          value={props.light_r}
-          className={style.width_150px}
-          onChange={(e) => {
-            const new_value = Number(e.target.value)
-            props.update_light_values(props.mapElem, props.light_i, new_value, props.light_a, props.light_p)
-          }}
-        />
       </div>
       <div>
         <h4>obj import: </h4>
         <button className={`${button_style}`} disabled={obj_imported} onClick={() => {
           import_obj(props.mapElem, props.lng, props.lat);
           setObjImported(true);
+          set_layer_visibility(props.mapElem)("point")(false);
         }}>
            import OBJ model
         </button>

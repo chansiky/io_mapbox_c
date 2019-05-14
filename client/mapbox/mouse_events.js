@@ -4,7 +4,20 @@ export const mark_mouse_coords = (map, callback) => {
     e.preventDefault();
 
     const lngLat = e.lngLat;
-    console.log(lngLat.lng, lngLat.lat);
-    callback(lngLat.lng, lngLat.lat);
+
+    const onMove = (e) => {
+      var coords = e.lngLat;
+      callback(map, coords.lng, coords.lat);
+    }
+
+    const onUp = (e) => {
+      // Unbind mouse/touch events
+      map.off('mousemove', onMove);
+    }
+
+    map.on('mousemove', onMove);
+    map.once('mouseup', onUp);
   });
 }
+
+ 

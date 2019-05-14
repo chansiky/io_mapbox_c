@@ -49,8 +49,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return{
-    update_lng_lat: (lng, lat) => {
+    update_lng_lat: (map, lng, lat) => {
       dispatch(update_pt_lng_lat(lng,lat));
+      const geojson = {
+        "type": "FeatureCollection",
+        "features": [{
+          "type": "Feature",
+          "geometry": {
+          "type": "Point",
+          "coordinates": [lng, lat]
+          }
+        }]
+      };
+      map.getSource('point').setData(geojson);
     }
   }
 }
