@@ -18,7 +18,7 @@ import {
   toggle_water,
   toggle_3d_buildings,
   toggle_obj_show,
-  update_light_azimuth
+  update_light_values
 } from './store';
 
 const button_style = `${style.no_focus_outline} ${style.border_radius_8px} ${style.background_color_light_gray_hover} ${style.border_0} ${style.width_150px} ${style.margin_2px}`;
@@ -44,17 +44,54 @@ const Sidebar = (props) => {
       </button>
       <div>
         <h4>light: </h4>
-        <span>azimuth:{props.light_a}</span>
+        <div>intensity:{props.light_i}</div>
         <input
           type="range"
-          min="1"
+          min="0.0"
+          max="1.0"
+          step="0.01"
+          value={props.light_i}
+          className={style.width_150px}
+          onChange={(e) => {
+            const new_value = Number(e.target.value)
+            props.update_light_values(props.mapElem, new_value, props.light_a, props.light_a, props.light_p)
+          }}
+        />
+        <div>radial coord:{props.light_r}</div>
+        <input
+          type="range"
+          min="0.0"
+          max="10.0"
+          step="0.01"
+          value={props.light_r}
+          className={style.width_150px}
+          onChange={(e) => {
+            const new_value = Number(e.target.value)
+            props.update_light_values(props.mapElem, props.light_i, new_value, props.light_a, props.light_p)
+          }}
+        />
+        <div>azimuth:{props.light_a}</div>
+        <input
+          type="range"
+          min="0"
           max="360"
           value={props.light_a}
           className={style.width_150px}
-          id="myRange"
           onChange={(e) => {
             const new_value = Number(e.target.value)
             props.update_light_values(props.mapElem, props.light_i, props.light_r, new_value, props.light_p)
+          }}
+        />
+        <div>polar:{props.light_p}</div>
+        <input
+          type="range"
+          min="0"
+          max="360"
+          value={props.light_p}
+          className={style.width_150px}
+          onChange={(e) => {
+            const new_value = Number(e.target.value)
+            props.update_light_values(props.mapElem, props.light_i, props.light_r, props.light_a, new_value)
           }}
         />
       </div>
@@ -104,10 +141,10 @@ const mapStateToProps = (state, ownProps) => {
     obj_show_on: state.mapbox.obj_show,
     lng: state.mapbox.pt_lng,
     lat: state.mapbox.pt_lat,
+    light_i: state.mapbox.light_i,
     light_r: state.mapbox.light_r,
     light_a: state.mapbox.light_a,
-    light_p: state.mapbox.light_p,
-    light_i: state.mapbox.light_intensity
+    light_p: state.mapbox.light_p
   }
 }
 
@@ -135,8 +172,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       set_layer_visibility(map)(layer)(!bool);
     },
     update_light_values: (map, light_i, light_r, light_a, light_p) => {
-      dispatch(update_light_azimuth(light_a));
-
+      dispatch(update_light_values(light_i, light_r, light_a, light_p));
       let light_values = {
         intensity: light_i,
         position: [
