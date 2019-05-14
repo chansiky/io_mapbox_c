@@ -8,10 +8,3 @@ export const light_values = {
     80   //polar
   ]
 }
-
-export const set_light = (map, intensity, radian, azimuth, polar) => {
-  mapElem.setLight({
-    intensity: intensity,
-    position: [radian, azimuth, polar]
-  });
-}

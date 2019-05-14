@@ -19,9 +19,7 @@ const MapApp = () => {
     <>
       <div className={`${style.flex_row} ${style.max_view_width_height}`}>
         <Sidebar mapElem={map}/>
-        <div id={MAP_ELEM_ID}  className={`${style.no_child_focus_outline} ${style.flex_grow_1} ${style.border_radius_8px}`} >
-          <MapLayer mapElem={map}/>
-        </div>
+        <MapLayer mapElemID={MAP_ELEM_ID} mapElem={map}/>
       </div>
     </>
   )

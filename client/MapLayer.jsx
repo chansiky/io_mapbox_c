@@ -12,10 +12,10 @@ import {
   update_pt_lng_lat,
 } from './store';
 import {connect} from 'react-redux';
-
+import style from './less/utility.less';
 import {light_values} from './mapbox/light';
 
-const MapLayer = ({mapElem, update_lng_lat, lng, lat}) => {
+const MapLayer = ({mapElemID, mapElem, update_lng_lat, lng, lat}) => {
   useEffect(() => {
     if(mapElem != false){
       mapElem.on("load", () => {
@@ -35,8 +35,8 @@ const MapLayer = ({mapElem, update_lng_lat, lng, lat}) => {
   })
 
   return (
-    <span>
-    </span>
+    <div id={mapElemID} className={`${style.no_child_focus_outline} ${style.flex_grow_1} ${style.border_radius_8px}`} >
+    </div>
   )
 }
 
