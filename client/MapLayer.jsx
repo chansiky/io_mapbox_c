@@ -3,6 +3,7 @@ import {map_maker} from './mapbox';
 import {water_layer} from './mapbox/layer/water';
 import {satellite_layer} from './mapbox/layer/satellite';
 import {building_layer} from './mapbox/layer/building';
+import {trigger_layer} from './mapbox/layer/trigger';
 import {import_obj_layer} from './mapbox/layer/obj';
 import {setup_insertion_point} from './mapbox/layer/insertion_point';
 import {mark_mouse_coords} from './mapbox/mouse_events';
@@ -18,6 +19,9 @@ const MapLayer = ({mapElem, update_lng_lat, lng, lat}) => {
   useEffect(() => {
     if(mapElem != false){
       mapElem.on("load", () => {
+        //trigger_layer is used to trigger a 'styledata' event since setting light doesn't trigger it
+        trigger_layer(mapElem);
+
         const building_id = building_layer(mapElem);
         const satellite_id = satellite_layer(mapElem);
         const water_id = water_layer(mapElem);
@@ -25,13 +29,7 @@ const MapLayer = ({mapElem, update_lng_lat, lng, lat}) => {
 
         mark_mouse_coords(mapElem, update_lng_lat);
 
-        const light = mapElem.getLight();
-        console.log({light})
-
         mapElem.setLight(light_values);
-        const light_2 = mapElem.getLight();
-        console.log({light})
-        console.log({light_2})
       })
     }
   })

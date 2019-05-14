@@ -3,6 +3,7 @@ import style from './less/utility.less';
 import { connect } from 'react-redux';
 import { layer_adder, set_layer_visibility, set_layers_visibility} from './mapbox/layer_helper';
 import {get_symbol_layers} from './mapbox/layer/labels';
+import {trigger_change} from './mapbox/layer/trigger';
 import {
   ID_3D_BUILDINGS,
   ID_WATER,
@@ -28,7 +29,7 @@ const Sidebar = (props) => {
   const [light_a, setLightA] = useState(50);
 
   return (
-    <section className={`${style.width_200px} ${style.flex_column} ${style.background_color_b} ${style.padding_4px}`}>
+    <section className={`${style.width_160px} ${style.flex_column} ${style.background_color_b} ${style.padding_4px}`}>
       <h2 className={`${style.margin_0} ${style.margin_bottom_5px}`}> Controls: </h2>
       <button className={`${button_style}`} onClick={() => props.toggle_labels(props.labels_on, props.mapElem)}>
         labels: {props.labels_on ? "on" : "off"}
@@ -44,6 +45,30 @@ const Sidebar = (props) => {
       </button>
       <div>
         <h4>light: </h4>
+        <div>azimuth:{props.light_a}</div>
+        <input
+          type="range"
+          min="-180"
+          max="180"
+          value={props.light_a}
+          className={style.width_150px}
+          onChange={(e) => {
+            const new_value = Number(e.target.value)
+            props.update_light_values(props.mapElem, props.light_i, props.light_r, new_value, props.light_p)
+          }}
+        />
+        <div>polar:{props.light_p}</div>
+        <input
+          type="range"
+          min="-180"
+          max="180"
+          value={props.light_p}
+          className={style.width_150px}
+          onChange={(e) => {
+            const new_value = Number(e.target.value)
+            props.update_light_values(props.mapElem, props.light_i, props.light_r, props.light_a, new_value)
+          }}
+        />
         <div>intensity:{props.light_i}</div>
         <input
           type="range"
@@ -60,38 +85,13 @@ const Sidebar = (props) => {
         <div>radial coord:{props.light_r}</div>
         <input
           type="range"
-          min="0.0"
-          max="10.0"
-          step="0.01"
+          min="-180"
+          max="180"
           value={props.light_r}
           className={style.width_150px}
           onChange={(e) => {
             const new_value = Number(e.target.value)
             props.update_light_values(props.mapElem, props.light_i, new_value, props.light_a, props.light_p)
-          }}
-        />
-        <div>azimuth:{props.light_a}</div>
-        <input
-          type="range"
-          min="0"
-          max="360"
-          value={props.light_a}
-          className={style.width_150px}
-          onChange={(e) => {
-            const new_value = Number(e.target.value)
-            props.update_light_values(props.mapElem, props.light_i, props.light_r, new_value, props.light_p)
-          }}
-        />
-        <div>polar:{props.light_p}</div>
-        <input
-          type="range"
-          min="0"
-          max="360"
-          value={props.light_p}
-          className={style.width_150px}
-          onChange={(e) => {
-            const new_value = Number(e.target.value)
-            props.update_light_values(props.mapElem, props.light_i, props.light_r, props.light_a, new_value)
           }}
         />
       </div>
@@ -182,6 +182,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         ]
       }
       map.setLight(light_values);
+      trigger_change(map);
     }
   }
 }
