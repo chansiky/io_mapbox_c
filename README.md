@@ -1,16 +1,25 @@
-# io mapbox
+# IO Mapbox Challenge
 
 ## Getting Started
 
-uses nodejs 12.0.0.  Install using `asdf`:  
+Uses nodejs 12.0.0.  Install using `asdf-vm`:  
 ```
 asdf install
 ```
+Install all dependencies:  
+```
+npm install
+```
 
-build the bundle and start the server:  
+## Starting the Server
+Build the bundle and start the server:  
 ```
 npm run start
 ```
 
-listen for the server on localhost:1000
+Building the bundle can take some time, you can build without minifying:  
+```
+npm run start-dev
+```
 
+When the site is up, listen for the server on `localhost:1000`  
