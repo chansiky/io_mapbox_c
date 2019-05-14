@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './less/utility.less';
 import { connect } from 'react-redux';
-import {set_layer_visibility} from './mapbox/layer_helper';
+import {set_layer_visibility, set_layers_visibility} from './mapbox/layer_helper';
+import {get_symbol_layers} from './mapbox/layer/labels';
 
 import {
   toggle_labels,
@@ -16,8 +17,11 @@ const Sidebar = (props) => {
   return (
     <section className={`${style.width_200px} ${style.flex_column} ${style.background_color_b} ${style.padding_4px}`}>
       <h2 className={style.margin_0}> Sidebar </h2>
+      <button className={`${button_style}`} onClick={() => props.toggle_labels(props.labels_on, props.mapElem, "water_a")}>
+        labels: {props.labels_on ? "on" : "off"}
+      </button>
       <button className={`${button_style}`} onClick={() => props.toggle_water(props.water_on, props.mapElem, "water_a")}>
-        water: {props.water_on ? "on" : "off"}
+        green_water: {props.water_on ? "on" : "off"}
       </button>
       <button className={`${button_style}`} onClick={() => props.toggle_satellite(props.satellite_on, props.mapElem, "satellite")}>
          sattelite: {props.satellite_on ? "on" : "off"}
@@ -38,7 +42,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return{
     toggle_labels: (bool, map, layer) => {
       dispatch(toggle_labels(bool));
-      set_layer_visibility(map)(layer)(!bool);
+      const symbol_layers = get_symbol_layers(map);
+      set_layers_visibility(map)(symbol_layers)(!bool);
     },
     toggle_satellite: (bool, map, layer) => {
       dispatch(toggle_satellite(bool));
