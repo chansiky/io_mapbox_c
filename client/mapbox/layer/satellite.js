@@ -1,44 +1,20 @@
 export const satellite_layer = (map) => {
-  /*
-  var layers = map.getStyle().layers;
-  var before_layer;
-  for (var i = 0; i < layers.length; i++) {
-    if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-      before_layer = layers[i].id;
-      break;
-    }
-  }
-*/
+  const layer_id = "satellite";
+  map.addSource("mapbox-satellite", {
+    "type": "raster",
+    "url": "mapbox://mapbox.satellite",
+    "tileSize": 256
+  });
 
-  map.on('load', function() {
-
-    map.addSource('mapbox-streets', {
-      "type": "vector",
-      "url": "mapbox://mapbox.mapbox-streets-v8"
-    });
-
-    map.addLayer(
-      {
-        "id": "water",
-        "source": "mapbox-streets",
-        "source-layer": "water",
-        "type": "fill",
-        "layout": {
-          //"visibility": "none",
-          "visibility": "visible",
-        },
-        "paint": {
-          "fill-color": "#ECC8D4"
-        }
-      }, "building"
-    );
-  })
+  map.addLayer(
+    {
+      "id": layer_id,
+      "source": "mapbox-satellite",
+      "type": "raster",
+      "layout": {
+        "visibility": "visible",
+      },
+    }, "building"
+  );
+  return layer_id
 }
-
-/*
-          "mapbox-satellite": {
-              "type": "raster",
-              "url": "mapbox://mapbox.satellite",
-              "tileSize": 256
-          }
-*/

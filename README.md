@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-uses nodejs 12.0.0.  If you use `asdf`:  
+uses nodejs 12.0.0.  Install using `asdf`:  
 ```
 asdf install
 ```

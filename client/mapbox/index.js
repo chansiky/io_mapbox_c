@@ -15,15 +15,14 @@ const base_style = {
     "version": 8,
     "name": "Mapbox Streets",
     "sprite": "mapbox://sprites/mapbox/streets-v8",
-    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf"
+
     //"layers": [...]
 }
 
 export const map_maker = (container_id) => {
   const map = new mapboxgl.Map({
     container: container_id,
-    //style: 'mapbox://styles/mapbox/streets-v8',
-    //style: 'mapbox://styles/chansiky/cjvmh1vp441m01cq4j3twj4gb',
     style: 'mapbox://styles/chansiky/cjvmlk3ha45ey1cmrmun5sw15',
     center: [empty_lot_1.lng, empty_lot_1.lat],
     zoom: 10.5,
