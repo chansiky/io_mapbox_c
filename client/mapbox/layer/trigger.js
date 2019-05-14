@@ -1,9 +1,20 @@
 import {ID_TRIGGER} from './index'
 
+const geojson = {
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [0, 0]
+      }
+  }]
+};
+
 export const trigger_layer = (map) => {
    map.addSource(ID_TRIGGER, {
      "type": "geojson",
-     "data": { }
+     "data": geojson
    });
    map.addLayer({
      "id": ID_TRIGGER,

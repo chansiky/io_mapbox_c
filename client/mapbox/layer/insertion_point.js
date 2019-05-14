@@ -1,15 +1,13 @@
-import {empty_lot_1} from '../../helper/chicago_locations'
-
 export const setup_insertion_point = (map, lng, lat) => {
   var geojson = {
-  "type": "FeatureCollection",
-  "features": [{
-  "type": "Feature",
-  "geometry": {
-  "type": "Point",
-  "coordinates": [lng, lat]
-  }
-  }]
+    "type": "FeatureCollection",
+    "features": [{
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [lng, lat]
+        }
+    }]
   };
   map.addSource('point', {
   "type": "geojson",
@@ -21,9 +19,9 @@ export const setup_insertion_point = (map, lng, lat) => {
   "type": "circle",
   "source": "point",
   "paint": {
-  "circle-radius": 5,
-  "circle-color": "#ED0D62"
-  }
+    "circle-radius": 8,
+    "circle-color": "#ED0D62"
+    }
   });
 }
 

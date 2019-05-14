@@ -35,8 +35,7 @@ const MapLayer = ({mapElemID, mapElem, update_lng_lat, lng, lat}) => {
   })
 
   return (
-    <div id={mapElemID} className={`${style.no_child_focus_outline} ${style.flex_grow_1} ${style.border_radius_8px}`} >
-    </div>
+    <div id={mapElemID} className={`${style.no_child_focus_outline} ${style.flex_grow_1} ${style.border_radius_8px}`} />
   )
 }
 

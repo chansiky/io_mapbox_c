@@ -11,7 +11,7 @@ export const mark_mouse_coords = (map, callback) => {
     }
 
     const onUp = (e) => {
-      // Unbind mouse/touch events
+      // Unbind mouse events
       map.off('mousemove', onMove);
     }
 

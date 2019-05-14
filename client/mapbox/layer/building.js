@@ -1,10 +1,8 @@
 import {ID_3D_BUILDINGS} from './index'
-// modified code from mapbox's example: 
-// https://docs.mapbox.com/mapbox-gl-js/example/3d-buildings/
+
 export const building_layer = (map) => {
   const layer_id = ID_3D_BUILDINGS;
 
-  // Insert the layer beneath any symbol layer.
   const layers = map.getStyle().layers;
 
   var labelLayerId;
@@ -27,8 +25,6 @@ export const building_layer = (map) => {
     },
     'paint': {
       'fill-extrusion-color': '#EFEADF',
-      // use an 'interpolate' expression to add a smooth transition effect to the
-      // buildings as the user zooms in
       'fill-extrusion-height': [
           "interpolate",
           ["linear"],
