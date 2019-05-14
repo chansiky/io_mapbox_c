@@ -1,7 +1,6 @@
-export const layer_adder = (map, layer) => {
-  map.on('styledata', function() {
-    map.addLayer(layer);
-  });
+export const layer_adder = (map, layer, before_layer) => {
+  map.addSource(layer.id, layer);
+  map.addLayer(layer, before_layer);
 }
 
 export const set_layer_visibility = (map) => (layer_id) => (visible) => {

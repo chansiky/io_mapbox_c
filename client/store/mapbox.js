@@ -6,6 +6,7 @@ const initial_state = {
   satellite: false,
   buildings_3d: true,
   water: false,
+  obj_show: true,
   pt_lng: empty_lot_1.lng,
   pt_lat: empty_lot_1.lat
 }
@@ -14,6 +15,7 @@ const initial_state = {
 const TOGGLE_LABELS = 'TOGGLE_LABELS';
 const TOGGLE_WATER = 'TOGGLE_WATER';
 const TOGGLE_SATELLITE = 'TOGGLE_SATELLITE';
+const TOGGLE_OBJ_SHOW = 'TOGGLE_OBJ_SHOW';
 const TOGGLE_3D_BUILDINGS = 'TOGGLE_3D_BUILDINGS';
 const UPDATE_PT_LNG_LAT = 'UPDATE_PT_LNG_LAT';
 
@@ -22,6 +24,7 @@ export const toggle_satellite    = toggle_creator(TOGGLE_SATELLITE)
 export const toggle_labels       = toggle_creator(TOGGLE_LABELS)
 export const toggle_water        = toggle_creator(TOGGLE_WATER)
 export const toggle_3d_buildings = toggle_creator(TOGGLE_3D_BUILDINGS)
+export const toggle_obj_show     = toggle_creator(TOGGLE_OBJ_SHOW)
 export const update_pt_lng_lat   = (lng, lat) => {
   return {
     type: UPDATE_PT_LNG_LAT,
@@ -40,6 +43,8 @@ const mapbox_reducer = (state = initial_state, action) => {
       return {...state, buildings_3d: action.value}
     case TOGGLE_WATER:
       return {...state, water: action.value}
+    case TOGGLE_OBJ_SHOW:
+      return {...state, obj_show: action.value}
     case UPDATE_PT_LNG_LAT:
       return {...state, pt_lng: action.lng, pt_lat: action.lat}
     default:

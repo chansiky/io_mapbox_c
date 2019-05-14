@@ -1,4 +1,4 @@
-import {ID_WATER} from './index'
+import {ID_WATER, ID_SATELLITE} from './index'
 export const water_layer = (map) => {
   const layer_id = ID_WATER;
   map.addSource('mapbox-streets', {
