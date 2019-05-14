@@ -1,0 +1,4 @@
+// layer_ids
+export const ID_3D_BUILDINGS = 'buildings_3d';
+export const ID_WATER = 'water_green';
+export const ID_SATELLITE = 'satellite';

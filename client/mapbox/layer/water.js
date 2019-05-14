@@ -1,5 +1,6 @@
+import {ID_WATER} from './index'
 export const water_layer = (map) => {
-  const layer_id = "water_a";
+  const layer_id = ID_WATER;
   map.addSource('mapbox-streets', {
     "type": "vector",
     "url": "mapbox://mapbox.mapbox-streets-v8"
@@ -12,10 +13,10 @@ export const water_layer = (map) => {
       "source-layer": "water",
       "type": "fill",
       "layout": {
-        "visibility": "visible",
+        "visibility": "none",
       },
       "paint": {
-        "fill-color": "#31B941"
+        "fill-color": "#0DEDC4"
       }
     }, "building"
   );
